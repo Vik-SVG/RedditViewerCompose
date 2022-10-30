@@ -26,3 +26,22 @@ val Typography = Typography(
     )
     */
 )
+
+val TextPrimary = TextStyle(
+    fontFamily = FontFamily.Default,
+    fontWeight = FontWeight.Normal,
+    fontSize = 16.sp
+)
+
+val TextSecondary = TextStyle(
+    fontFamily = FontFamily.Default,
+    fontWeight = FontWeight.Normal,
+    color = Grey,
+    fontSize = 12.sp
+)
+
+val TextTitle = TextStyle(
+    fontFamily = FontFamily.Default,
+    fontWeight = FontWeight.Bold,
+    fontSize = 16.sp
+)
