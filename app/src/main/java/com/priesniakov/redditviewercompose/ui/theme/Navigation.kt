@@ -7,8 +7,10 @@ import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.priesniakov.redditviewercompose.ui.home.TopPostsScreen
-import com.priesniakov.redditviewercompose.ui.post_details.PostDetails
+import com.priesniakov.redditviewercompose.R
+import com.priesniakov.redditviewercompose.ui.home.HomePageScreen
+import com.priesniakov.redditviewercompose.ui.home.top.TopPostsScreen
+import com.priesniakov.redditviewercompose.ui.post_details.EmptyScreen
 import kotlinx.parcelize.Parcelize
 
 sealed class Screen(val title: String, val route: String) : Parcelable
@@ -28,9 +30,36 @@ object AllPostsListScreen : Screen("All", "all_posts_list_screen"), Parcelable
 @Parcelize
 object CustomPostsListScreen : Screen("Custom", "custom_posts_list_screen"), Parcelable
 
+@Parcelize
+object HomeScreen : Screen("Home", "home_screen"), Parcelable
+
+@Parcelize
+object ExploreScreen : Screen("Explore", "explore_screen"), Parcelable
+
+@Parcelize
+object ProfileScreen : Screen("Profile", "profile_screen"), Parcelable
+
+@Parcelize
+object MessagesScreen : Screen("Messages", "messages_screen"), Parcelable
+
+@Parcelize
+object MakePostScreen : Screen("Make post", "make_post_screen"), Parcelable
+
 val redditViewerScreens = listOf(TopPostsListScreen, PostDetailScreen)
+
 val redditScreensTopPanelScreens =
     listOf(TopPostsListScreen, AllPostsListScreen, CustomPostsListScreen, PopularPostsListScreen)
+
+val redditRootScreens =
+    listOf(HomeScreen, ExploreScreen, ProfileScreen, MessagesScreen, MakePostScreen)
+
+val rootScreenIcons = mapOf(
+    HomeScreen.route to R.drawable.ic_root_home,
+    ExploreScreen.route to R.drawable.ic_explore,
+    MessagesScreen.route to R.drawable.ic_baseline_message_24,
+    MakePostScreen.route to R.drawable.ic_baseline_create_24,
+    ProfileScreen.route to R.drawable.ic_baseline_person_24,
+)
 
 
 fun NavHostController.navigateSingleTopTo(route: String) =
@@ -49,6 +78,35 @@ fun NavHostController.navigateToDetailsScreen() {
 }
 
 @Composable
+fun RedditAppNavHost(
+    navController: NavHostController,
+    modifier: Modifier = Modifier
+) {
+    NavHost(
+        navController = navController,
+        startDestination = HomeScreen.route,
+        modifier = modifier
+    ) {
+        composable(route = HomeScreen.route) {
+            HomePageScreen()
+        }
+        composable(route = ExploreScreen.route) {
+            EmptyScreen()
+        }
+        composable(route = MessagesScreen.route) {
+            EmptyScreen()
+        }
+        composable(route = MakePostScreen.route) {
+            EmptyScreen()
+        }
+        composable(route = ProfileScreen.route) {
+            EmptyScreen()
+        }
+    }
+}
+
+
+@Composable
 fun RedditViewerNavHost(
     navController: NavHostController,
     modifier: Modifier = Modifier
@@ -62,16 +120,16 @@ fun RedditViewerNavHost(
             TopPostsScreen(onPostClick = { navController.navigateSingleTopTo(PostDetailScreen.route) })
         }
         composable(route = PostDetailScreen.route) {
-            PostDetails()
+            EmptyScreen()
         }
         composable(route = PopularPostsListScreen.route) {
-            PostDetails()
+            EmptyScreen()
         }
         composable(route = AllPostsListScreen.route) {
-            PostDetails()
+            EmptyScreen()
         }
         composable(route = CustomPostsListScreen.route) {
-            PostDetails()
+            EmptyScreen()
         }
     }
 }

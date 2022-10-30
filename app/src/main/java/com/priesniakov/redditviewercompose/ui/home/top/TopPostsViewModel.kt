@@ -1,7 +1,6 @@
-package com.priesniakov.redditviewercompose.ui.home
+package com.priesniakov.redditviewercompose.ui.home.top
 
 import androidx.compose.runtime.State
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -17,7 +16,6 @@ import com.priesniakov.redditviewercompose.data.remote.*
 import com.priesniakov.redditviewercompose.domain.RedditPostsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel

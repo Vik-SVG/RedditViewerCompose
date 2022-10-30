@@ -5,3 +5,7 @@ import androidx.compose.runtime.Composable
 @Composable
 fun PostDetails() {
 }
+
+@Composable
+fun EmptyScreen() {
+}

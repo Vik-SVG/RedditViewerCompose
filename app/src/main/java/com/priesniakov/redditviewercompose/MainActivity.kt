@@ -11,7 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.priesniakov.redditviewercompose.ui.home.components.RedditTopBar
+import com.priesniakov.redditviewercompose.ui.home.components.RedditBottomBar
 import com.priesniakov.redditviewercompose.ui.home.components.TopSearchBar
 import com.priesniakov.redditviewercompose.ui.theme.*
 import dagger.hilt.android.AndroidEntryPoint
@@ -29,38 +29,34 @@ class MainActivity : ComponentActivity() {
 @Composable
 private fun RedditViewerApp() {
     RedditViewerComposeTheme {
-        val navController = rememberNavController()
-        val currentBackStack by navController.currentBackStackEntryAsState()
-        val currentDestination = currentBackStack?.destination
-        var currentScreen by rememberSaveable {
-            mutableStateOf(redditViewerScreens.find { it.route == currentDestination?.route }
-                ?: TopPostsListScreen)
+        val rootNavController = rememberNavController()
+        val rootCurrentBackStack by rootNavController.currentBackStackEntryAsState()
+        val currentRootDestination = rootCurrentBackStack?.destination
+        var currentRootScreen by rememberSaveable {
+            mutableStateOf(redditViewerScreens.find { it.route == currentRootDestination?.route }
+                ?: HomeScreen)
         }
 
+        var appBarTitle by rememberSaveable() {
+            mutableStateOf(HomeScreen.title)
+        }
         Scaffold(
             modifier = Modifier.fillMaxSize(),
             topBar = {
-                TopSearchBar()
+                TopSearchBar(appBarTitle)
             },
             bottomBar = {
-                //Place for bottom bar (similar to top bar)
-            }) { outerPadding ->
-            Scaffold(
-                modifier = Modifier.padding(outerPadding), topBar = {
-                    RedditTopBar(
-                        currentScreen = currentScreen,
-                        allScreens = redditScreensTopPanelScreens,
-                        onSelected = {
-                            navController.navigateSingleTopTo(it.route)
-                            currentScreen = it
-                        }
-                    )
-                }) { innerPadding ->
-                RedditViewerNavHost(
-                    navController = navController,
-                    modifier = Modifier.padding(innerPadding)
+                RedditBottomBar(
+                    currentScreen = currentRootScreen,
+                    allScreens = redditRootScreens,
+                    onSelected = {
+                        appBarTitle = it.title
+                        rootNavController.navigateSingleTopTo(it.route)
+                        currentRootScreen = it
+                    }
                 )
-            }
+            }) { outerPadding ->
+            RedditAppNavHost(navController = rootNavController, Modifier.padding(outerPadding))
         }
     }
 }

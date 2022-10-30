@@ -17,13 +17,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import com.priesniakov.redditviewercompose.ui.theme.TextAppBar
 import com.priesniakov.redditviewercompose.ui.theme.Vermilion
 
 @Composable
-fun TopSearchBar() {
+fun TopSearchBar(appBarTitle: String) {
     Row(
         modifier = Modifier
             .padding(10.dp)
@@ -32,7 +31,7 @@ fun TopSearchBar() {
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
-        Text(text = "Home", style = TextAppBar)
+        Text(text = appBarTitle, style = TextAppBar)
         Spacer(modifier = Modifier.size(width = 36.dp, height = 0.dp))
 
         var isSearchActive by rememberSaveable { mutableStateOf(false) }

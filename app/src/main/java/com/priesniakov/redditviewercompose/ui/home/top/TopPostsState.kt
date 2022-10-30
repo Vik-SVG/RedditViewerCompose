@@ -1,4 +1,4 @@
-package com.priesniakov.redditviewercompose.ui.home
+package com.priesniakov.redditviewercompose.ui.home.top
 
 import com.priesniakov.redditviewercompose.data.entities.response.Children
 
