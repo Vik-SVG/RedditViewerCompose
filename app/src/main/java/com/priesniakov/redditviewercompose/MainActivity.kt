@@ -1,5 +1,6 @@
 package com.priesniakov.redditviewercompose
 
+import android.content.res.Resources.Theme
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -9,13 +10,11 @@ import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.BlendMode.Companion.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.priesniakov.redditviewercompose.ui.theme.RedditViewerComposeTheme
-import com.priesniakov.redditviewercompose.ui.theme.RedditViewerNavHost
-import com.priesniakov.redditviewercompose.ui.theme.TopPostsListScreen
-import com.priesniakov.redditviewercompose.ui.theme.redditViewerScreens
+import com.priesniakov.redditviewercompose.ui.theme.*
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

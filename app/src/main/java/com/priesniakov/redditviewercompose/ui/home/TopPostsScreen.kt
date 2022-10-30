@@ -3,12 +3,15 @@ package com.priesniakov.redditviewercompose.ui.home
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -33,10 +36,17 @@ fun TopPostsScreen(
                 if (!refreshState.isRefreshing)
                     lazyItems.refresh()
             }) {
-            if (lazyItems.loadState.refresh !is LoadState.Loading)
-            LazyColumn(modifier = Modifier.fillMaxSize(), state = rememberLazyListState()) {
-                items(items = lazyItems, key = { it.data.id }) {
-                    PostsListItem(onItemClick = onPostClick, post = it?.data)
+            if (lazyItems.loadState.refresh !is LoadState.Loading) {
+                LazyColumn(
+                    modifier = Modifier
+                        .fillMaxSize(),
+                    state = rememberLazyListState(),
+                    verticalArrangement = Arrangement.spacedBy(16.dp),
+                    contentPadding = PaddingValues(10.dp)
+                ) {
+                    items(items = lazyItems, key = { it.data.id }) {
+                        PostsListItem(onItemClick = onPostClick, post = it?.data)
+                    }
                 }
             }
         }
