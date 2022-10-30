@@ -45,3 +45,9 @@ val TextTitle = TextStyle(
     fontWeight = FontWeight.Bold,
     fontSize = 16.sp
 )
+
+val TextAppBar = TextStyle(
+    fontFamily = FontFamily.Default,
+    fontWeight = FontWeight.Bold,
+    fontSize = 32.sp
+)

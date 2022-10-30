@@ -1,11 +1,11 @@
 package com.priesniakov.redditviewercompose.ui.home.components
 
 import android.content.Intent
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
@@ -106,7 +106,7 @@ private fun MorePopup() {
         mutableStateOf(false)
     }
 
-    Image(
+    Icon(
         modifier = Modifier
             .size(24.dp)
             .clickable {
@@ -144,7 +144,7 @@ private fun MorePopup() {
 @Composable
 private fun Bookmark() {
     var isBookmarked by rememberSaveable { mutableStateOf(false) }
-    Image(
+    Icon(
         painter = painterResource(id = if (isBookmarked) R.drawable.ic_baseline_bookmark_24 else R.drawable.ic_baseline_bookmark_border_24),
         modifier = Modifier
             .size(24.dp)
@@ -160,7 +160,7 @@ private fun CommentsAndShare(post: DataX?) {
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.End,
     ) {
-        Image(
+        Icon(
             modifier = Modifier
                 .size(20.dp),
             painter = painterResource(id = R.drawable.ic_baseline_comment_24),
@@ -175,7 +175,7 @@ private fun CommentsAndShare(post: DataX?) {
         )
 
         val context = LocalContext.current
-        Image(
+        Icon(
             modifier = Modifier
                 .size(20.dp)
                 .clickable {
